@@ -7,6 +7,7 @@
 
 import 'dart:io';
 
+bool winnerCheckerIsTrue = false;
 void main() {
   List<List<String>> board = createBoard();
   printBoard(board);
@@ -23,22 +24,11 @@ void main() {
     }
     board[row][column] = currentPlayer;
     printBoard(board);
-    if(board[row][0] == board[row][1] && board[row][1] == board[row][2]){
-      print('${currentPlayer} is the winner');
+    if(winningChecker(board,row,column,currentPlayer) != null){
+      print(winningChecker(board,row,column,currentPlayer));
       break;
     }
-    else if(board[0][column] == board[1][column] && board[1][column] == board[2][column]){
-      print('${currentPlayer} is the winner');
-      break;
-    }
-    else if(board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[1][1] != ' '){
-      print('${currentPlayer} is the winner');
-      break;
-    }
-    else if(board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[1][1] != ' '){
-      print('${currentPlayer} is the winner');
-      break;
-    }
+
 
     if (currentPlayer == 'X') {
       currentPlayer = 'O';
@@ -55,6 +45,25 @@ List<List<String>> createBoard() {
   return List.generate(boardSize, (_) => List.filled(boardSize, ' '));
 }
 
+String winningChecker(List<List<String>>board,int row,int column,String currentPlayer){
+  if(board[row][0] == board[row][1] && board[row][1] == board[row][2]){
+    winnerCheckerIsTrue = true;
+    return('${currentPlayer} is the winner');
+  }
+  else if(board[0][column] == board[1][column] && board[1][column] == board[2][column]){
+    winnerCheckerIsTrue = true;
+    return('${currentPlayer} is the winner');
+  }
+  else if(board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[1][1] != ' '){
+    winnerCheckerIsTrue = true;
+    return('${currentPlayer} is the winner');
+  }
+  else if(board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[1][1] != ' '){
+    winnerCheckerIsTrue = true;
+    return('${currentPlayer} is the winner');
+  }
+
+}
 
 bool validate(int row, int column, List<List<String>> board) {
   return board[row][column] == ' ';
