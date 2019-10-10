@@ -23,6 +23,23 @@ void main() {
     }
     board[row][column] = currentPlayer;
     printBoard(board);
+    if(board[row][0] == board[row][1] && board[row][1] == board[row][2]){
+      print('${currentPlayer} is the winner');
+      break;
+    }
+    else if(board[0][column] == board[1][column] && board[1][column] == board[2][column]){
+      print('${currentPlayer} is the winner');
+      break;
+    }
+    else if(board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[1][1] != ' '){
+      print('${currentPlayer} is the winner');
+      break;
+    }
+    else if(board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[1][1] != ' '){
+      print('${currentPlayer} is the winner');
+      break;
+    }
+
     if (currentPlayer == 'X') {
       currentPlayer = 'O';
     } else {
@@ -46,6 +63,19 @@ bool validate(int row, int column, List<List<String>> board) {
 int getColumn(String userInput) => ['A', 'B', 'C'].indexOf(userInput[0]);
 
 int getRow(String userInput) => ['1', '2', '3'].indexOf(userInput[1]);
+
+String checkRows(List<String> board){
+
+}
+
+String checkDiagonals(List<String> board){
+
+}
+
+String checkWinner(){
+
+
+}
 
 void printBoard(List<List<String>> board) {
   print('   A   B   C ');
